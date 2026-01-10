@@ -4,6 +4,10 @@ import { Route, Routes } from 'react-router-dom'
 import MainLayout from '@/layouts/MainLayout'
 import AuthLayout from '@/layouts/AuthLayout'
 
+// Guards
+import ProtectedRoute from '@/components/guards/ProtectedRoute'
+import GuestRoute from '@/components/guards/GuestRoute'
+
 // Pages
 import IndexPage from '@/pages'
 import LoginPage from '@/pages/login'
@@ -17,18 +21,22 @@ import './index.css'
 function App() {
   return (
     <Routes>
-      {/* Auth Routes */}
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+      {/* Auth Routes (Restricted to non-authenticated users) */}
+      <Route element={<GuestRoute />}>
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
       </Route>
 
-      {/* Main Routes */}
-      <Route element={<MainLayout />}>
-        <Route index element={<IndexPage />} />
-        <Route path="/top-up" element={<TopUpPage />} />
-        <Route path="/transaction" element={<TransactionPage />} />
-        <Route path="/account" element={<AccountPage />} />
+      {/* Main Routes (Restricted to authenticated users) */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<MainLayout />}>
+          <Route index element={<IndexPage />} />
+          <Route path="/top-up" element={<TopUpPage />} />
+          <Route path="/transaction" element={<TransactionPage />} />
+          <Route path="/account" element={<AccountPage />} />
+        </Route>
       </Route>
     </Routes>
   )

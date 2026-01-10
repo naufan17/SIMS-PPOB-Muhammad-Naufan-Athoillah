@@ -4,7 +4,7 @@ import { combineReducers } from 'redux'
 import { persistStore, persistReducer, type Persistor } from 'redux-persist'
 import { encryptTransform } from 'redux-persist-transform-encrypt'
 import storage from 'redux-persist/lib/storage'
-import authSlice from '@/store/slices/auth.slice'
+import authSlice from '@/store/slices/authSlice'
 
 const persistConfig: {
   key: string
@@ -16,7 +16,7 @@ const persistConfig: {
   storage,
   transforms: [
     encryptTransform({
-      secretKey: import.meta.env.VITE_SECRET_KEY || 'default-secret-key', // Added fallback
+      secretKey: import.meta.env.VITE_SECRET_KEY, 
       onError: function (error: any) {
         console.error(error)
       },

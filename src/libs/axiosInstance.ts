@@ -1,0 +1,41 @@
+import Axios, { type AxiosInstance } from 'axios';
+import { store } from '@/store/store';
+import { deleteCredentials } from '@/store/slices/authSlice';
+
+const axiosInstance: AxiosInstance = Axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = store.getState().auth.token;
+
+    if (token) config.headers.Authorization = `Bearer ${token}`;
+    
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (
+      error.response?.data.message === 'Access token is invalid' ||
+      error.response?.data.message === 'User not found' ||
+      error.response?.data.message === 'jwt expired' ||
+      error.response?.data.message === 'jwt malformed' ||
+      error.response?.data.message === 'jwt signature is required'
+    ) {
+      store.dispatch(deleteCredentials())
+      window.location.href = '/login'
+    }
+
+    return Promise.reject(error);
+  }
+);
+
+export default axiosInstance;

@@ -1,6 +1,18 @@
+import { useAppDispatch } from "@/hooks/redux"
+import { deleteCredentials } from "@/store/slices/authSlice"
+import { useNavigate } from "react-router-dom"
+
 const AccountPage = () => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    dispatch(deleteCredentials())
+    navigate("/login")
+  }
+
   return (
-    <div className="flex flex-col gap-12 justify-center items-center py-8 px-4 mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+    <div className="flex flex-col gap-8 justify-center items-center py-8 px-4 mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl">
       <div className="w-full flex flex-col items-center gap-6">
         <div>
           <img src="" alt="" />
@@ -44,10 +56,18 @@ const AccountPage = () => {
             type="submit" 
             className="w-full h-10 px-2 inline-flex items-center justify-center font-medium text-white bg-red-600 hover:bg-red-500 rounded"
           >
-            Simpan
+            Edit Profil
           </button>
         </div>
       </form>
+      <div className="w-full">
+        <button
+          onClick={handleLogout}
+          className="w-full h-10 px-2 inline-flex items-center justify-center font-medium text-red-600 border border-red-600 bg-white hover:bg-gray-50 rounded"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   )
 }
