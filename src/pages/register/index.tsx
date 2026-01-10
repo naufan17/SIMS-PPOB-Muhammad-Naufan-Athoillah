@@ -8,7 +8,7 @@ const RegisterPage = () => {
           Lengkapi data untuk membuat akun
         </h3>
       </div>
-      <form action="" className="w-full flex flex-col gap-6">
+      <form action="" className="w-full flex flex-col gap-8">
         <div>
           <label htmlFor="email" hidden>Email</label>
           <input 
@@ -16,7 +16,7 @@ const RegisterPage = () => {
             id="email" 
             name="email" 
             placeholder="@ masukan email anda" 
-            className="w-full h-10 px-2 border border-gray-300 rounded" 
+            className="w-full h-10 px-2 text-sm font-medium border border-gray-300 rounded" 
           />
         </div>
         <div>
@@ -26,7 +26,7 @@ const RegisterPage = () => {
             id="firstName" 
             name="firstName" 
             placeholder="@ masukan nama anda" 
-            className="w-full h-10 px-2 border border-gray-300 rounded" 
+            className="w-full h-10 px-2 text-sm font-medium border border-gray-300 rounded" 
           />
         </div>
         <div>
@@ -36,7 +36,7 @@ const RegisterPage = () => {
             id="lastName" 
             name="lastName" 
             placeholder="@ masukan nama anda" 
-            className="w-full h-10 px-2 border border-gray-300 rounded" 
+            className="w-full h-10 px-2 text-sm font-medium border border-gray-300 rounded" 
           />
         </div>
         <div>
@@ -46,18 +46,18 @@ const RegisterPage = () => {
             id="password" 
             name="password" 
             placeholder="@ masukan password anda" 
-            className="w-full h-10 px-2 border border-gray-300 rounded" 
+            className="w-full h-10 px-2 text-sm font-medium border border-gray-300 rounded" 
           />
         </div>
         <button 
           type="submit" 
-          className="w-full h-10 px-2 inline-flex items-center justify-center font-medium text-white bg-orange-600 hover:bg-orange-500 rounded"
+          className="w-full h-10 px-2 inline-flex items-center justify-center font-medium text-white bg-red-600 hover:bg-red-500 rounded"
         >
           Registrasi
         </button>
       </form>
       <div className="text-center mt-6">
-        <p>Sudah punya akun? login <Link to="/login" className="font-medium text-orange-600 hover:text-orange-500">di sini</Link></p>
+        <p>Sudah punya akun? login <Link to="/login" className="font-medium text-red-600 hover:text-red-500">di sini</Link></p>
       </div>
     </div>
   )
