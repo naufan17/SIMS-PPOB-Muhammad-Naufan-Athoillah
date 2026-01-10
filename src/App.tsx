@@ -2,7 +2,10 @@ import { Route, Routes } from 'react-router-dom'
 import IndexPage from '@/pages'
 import MainLayout from '@/layouts/MainLayout'
 
-import './App.css'
+import AuthLayout from '@/layouts/AuthLayout'
+import LoginPage from '@/pages/login'
+import RegisterPage from '@/pages/register'
+import './index.css';
 
 function App() {
   return (
@@ -13,6 +16,22 @@ function App() {
           <MainLayout>
             <IndexPage />
           </MainLayout>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <AuthLayout>
+            <LoginPage />
+          </AuthLayout>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <AuthLayout>
+            <RegisterPage />
+          </AuthLayout>
         }
       />
     </Routes>
