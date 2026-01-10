@@ -1,49 +1,35 @@
 import { Route, Routes } from 'react-router-dom'
-import IndexPage from '@/pages'
-import MainLayout from '@/layouts/MainLayout'
 
+// Layouts
+import MainLayout from '@/layouts/MainLayout'
 import AuthLayout from '@/layouts/AuthLayout'
+
+// Pages
+import IndexPage from '@/pages'
 import LoginPage from '@/pages/login'
 import RegisterPage from '@/pages/register'
-import ProfilePage from './pages/profile'
+import AccountPage from '@/pages/account'
+import TopUpPage from '@/pages/top-up'
+import TransactionPage from '@/pages/transaction'
 
-import './index.css';
+import './index.css'
 
 function App() {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <MainLayout>
-            <IndexPage />
-          </MainLayout>
-        }
-      />
-      <Route
-        path="/login"
-        element={
-          <AuthLayout>
-            <LoginPage />
-          </AuthLayout>
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <AuthLayout>
-            <RegisterPage />
-          </AuthLayout>
-        }
-      />
-      <Route
-        path="/profile"
-        element={
-          <MainLayout>
-            <ProfilePage />
-          </MainLayout>
-        }
-      />
+      {/* Auth Routes */}
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Route>
+
+      {/* Main Routes */}
+      <Route element={<MainLayout />}>
+        <Route index element={<IndexPage />} />
+        <Route path="/top-up" element={<TopUpPage />} />
+        <Route path="/transaction" element={<TransactionPage />} />
+        <Route path="/account" element={<AccountPage />} />
+      </Route>
     </Routes>
   )
 }

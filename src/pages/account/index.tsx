@@ -1,4 +1,4 @@
-const ProfilePage = () => {
+const AccountPage = () => {
   return (
     <div className="flex flex-col gap-12 justify-center items-center py-8 px-4 mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl">
       <div className="w-full flex flex-col items-center gap-6">
@@ -52,4 +52,4 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage
+export default AccountPage

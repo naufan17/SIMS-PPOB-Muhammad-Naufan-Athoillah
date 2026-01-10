@@ -1,12 +1,8 @@
-import type { ReactNode } from 'react'
+import { Outlet } from 'react-router-dom'
 import IllustrationLogin from '@/assets/images/Illustrasi Login.png'
 import Logo from '@/assets/images/Logo.png'
 
-interface AuthLayoutProps {
-  children: ReactNode
-}
-
-const AuthLayout = ({ children }: AuthLayoutProps) => {
+const AuthLayout = () => {
   return (
     <div className="min-h-screen w-full grid grid-cols-1 lg:grid-cols-2">
       {/* Left Side: Form */}
@@ -16,7 +12,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
             <img src={Logo} alt="Logo" className="w-8 h-8" />
             <h1 className="text-xl font-bold">SIMS PPOB</h1>
           </div>
-          {children}
+          <Outlet />
         </div>
       </div>
 

@@ -1,15 +1,11 @@
+import { Outlet } from 'react-router-dom'
 import Header from '@/components/Header'
-import type { ReactNode } from 'react'
 
-interface LayoutProps {
-  children: ReactNode
-}
-
-export default function MainLayout({ children }: LayoutProps) {
+export default function MainLayout() {
   return (
     <>
       <Header/>
-      {children}
+      <Outlet />
     </>
   )
 }
