@@ -15,10 +15,11 @@ import RegisterPage from '@/pages/register'
 import AccountPage from '@/pages/account'
 import TopUpPage from '@/pages/topup'
 import TransactionPage from '@/pages/transaction'
+import ServicePage from '@/pages/service'
 
 // Error Pages
-import NotFoundPage from '@/pages/error/NotFound'
-import ForbiddenPage from '@/pages/error/Forbidden'
+import NotFoundPage from '@/pages/not-found'
+import ForbiddenPage from '@/pages/forbidden'
 
 import './index.css'
 
@@ -40,6 +41,7 @@ function App() {
           <Route path="/topup" element={<TopUpPage />} />
           <Route path="/transaction" element={<TransactionPage />} />
           <Route path="/account" element={<AccountPage />} />
+          <Route path="/service/:serviceCode" element={<ServicePage />} />
         </Route>
       </Route>
 

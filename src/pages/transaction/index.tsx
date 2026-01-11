@@ -10,7 +10,7 @@ const TransactionPage = () => {
   const { data, isLoading } = useTransactionHistory({ offset: 0, limit });
 
   return (
-    <div className="w-full flex flex-col gap-12 p-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl">
+    <div className="w-full flex flex-col gap-12 p-6 lg:p-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl">
       {/* Profile & Balance Section */}
       <div className="w-full flex flex-col lg:flex-row gap-6">
         <div className="lg:w-2/5">

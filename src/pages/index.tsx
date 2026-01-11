@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Profile from "@/components/Profile";
 import Balance from "@/components/Balance";
 import useInformation, { type BannerData, type ServiceData } from "@/api/information";
@@ -30,14 +31,18 @@ const IndexPage = () => {
               </div>
             ))
           : services?.map((service: ServiceData, index: number) => (
-              <div key={index} className="flex flex-col items-center gap-2 group cursor-pointer">
+              <Link 
+                to={`/service/${service.service_code}`}
+                key={index} 
+                className="flex flex-col items-center gap-2 group cursor-pointer"
+              >
                 <div className="w-14 h-14 p-2 bg-gray-50 rounded-xl group-hover:bg-red-50 transition-colors flex items-center justify-center">
                   <img src={service.service_icon} alt={service.service_name} className="w-full h-full object-contain" />
                 </div>
                 <h2 className="text-[11px] font-medium text-center leading-tight transition-colors group-hover:text-red-600">
                   {service.service_name}
                 </h2>
-              </div>
+              </Link>
             ))}
       </div>
 

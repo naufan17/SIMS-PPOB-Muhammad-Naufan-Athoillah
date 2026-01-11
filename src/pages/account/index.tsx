@@ -100,7 +100,7 @@ const AccountPage = () => {
   }
 
   return (
-    <div className="flex flex-col gap-8 justify-center items-center py-8 px-4 mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+    <div className="flex flex-col gap-8 justify-center items-center p-6 lg:p-8 mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl">
       <div className="w-full flex flex-col items-center gap-6">
         <div className="relative group">
           <img 

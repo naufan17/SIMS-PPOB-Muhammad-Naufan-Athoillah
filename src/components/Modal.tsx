@@ -8,6 +8,7 @@ interface ModalProps {
   children: React.ReactNode;
   icon?: React.ReactNode;
   status?: 'success' | 'error' | 'info';
+  showCloseButton?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({ 
@@ -16,7 +17,8 @@ const Modal: React.FC<ModalProps> = ({
   title, 
   children, 
   icon,
-  status = 'info' 
+  status = 'info',
+  showCloseButton = true
 }) => {
   useEffect(() => {
     if (isOpen) {
@@ -62,12 +64,14 @@ const Modal: React.FC<ModalProps> = ({
           <div className="text-gray-500 font-medium mb-2 whitespace-pre-wrap leading-relaxed">
             {children}
           </div>
-          <button
-            onClick={onClose}
-            className="w-full py-3 px-4 text-red-600 font-bold hover:text-red-700 transition-colors focus:outline-none"
-          >
-            Kembali ke Beranda
-          </button>
+          {showCloseButton && (
+            <button
+              onClick={onClose}
+              className="w-full py-3 px-4 text-red-600 font-bold hover:text-red-700 transition-colors focus:outline-none"
+            >
+              Kembali ke Beranda
+            </button>
+          )}
         </div>
       </div>
     </div>,
