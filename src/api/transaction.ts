@@ -1,8 +1,13 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 import axiosInstance from "@/libs/axiosInstance"
+import type { ApiResponse } from "./auth";
+
+export interface BalanceData {
+  balance: number;
+}
 
 const useTransaction = () => {  
-  const getBalance = useQuery({
+  const getBalance = useQuery<ApiResponse<BalanceData>>({
     queryKey: ["balance"],
     queryFn: async () => {
       const response = await axiosInstance.get("/balance")

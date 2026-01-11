@@ -1,11 +1,66 @@
 import Profile from "@/components/Profile";
 import Balance from "@/components/Balance";
+import useInformation, { type BannerData, type ServiceData } from "@/api/information";
 
 const IndexPage = () => {
+  const { getServices, getBanner } = useInformation()
+
+  const services = getServices.data?.data
+  const banners = getBanner.data?.data
+
   return (
-    <div className="w-full flex flex-col sm:flex-row gap-12 justify-center items-center py-8 px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl">
-      <Profile />
-      <Balance />
+    <div className="w-full flex flex-col gap-12 p-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl">
+      {/* Profile & Balance Section */}
+      <div className="w-full flex flex-col lg:flex-row gap-6">
+        <div className="lg:w-2/5">
+          <Profile />
+        </div>
+        <div className="lg:w-3/5">
+          <Balance />
+        </div>
+      </div>
+
+      {/* Services Section */}
+      <div className="w-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-4">
+        {getServices.isLoading
+          ? [...Array(12)].map((_, i) => (
+              <div key={i} className="flex flex-col items-center gap-2 animate-pulse">
+                <div className="w-12 h-12 bg-gray-200 rounded-lg"></div>
+                <div className="h-3 w-16 bg-gray-200 rounded"></div>
+              </div>
+            ))
+          : services?.map((service: ServiceData, index: number) => (
+              <div key={index} className="flex flex-col items-center gap-2 group cursor-pointer">
+                <div className="w-14 h-14 p-2 bg-gray-50 rounded-xl group-hover:bg-red-50 transition-colors flex items-center justify-center">
+                  <img src={service.service_icon} alt={service.service_name} className="w-full h-full object-contain" />
+                </div>
+                <h2 className="text-[11px] font-medium text-center leading-tight transition-colors group-hover:text-red-600">
+                  {service.service_name}
+                </h2>
+              </div>
+            ))}
+      </div>
+
+      {/* Banner Section */}
+      <div className="w-full flex flex-col gap-4">
+        <h5 className="text-sm font-bold text-gray-800">
+          Temukan promo menarik
+        </h5>
+        <div className="w-full overflow-x-auto no-scrollbar flex flex-row gap-4 pb-4">
+          {getBanner.isLoading
+            ? [...Array(4)].map((_, i) => (
+                <div key={i} className="min-w-[270px] h-28 bg-gray-200 rounded-xl animate-pulse"></div>
+              ))
+            : banners?.map((banner: BannerData, index: number) => (
+                <div 
+                  key={index} 
+                  className="min-w-[270px] h-28 rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+                >
+                  <img src={banner.banner_image} alt={banner.banner_name} className="w-full h-full object-cover" />
+                </div>
+              ))}
+        </div>
+      </div>  
     </div>
   )
 }

@@ -19,11 +19,11 @@ const accountSchema = z.object({
 type AccountFormValues = z.infer<typeof accountSchema>
 
 const AccountPage = () => {
+  const { getProfile, updateProfile, updateImage } = useProfile()
+
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { getProfile, updateProfile, updateImage } = useProfile()
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  
+  const fileInputRef = useRef<HTMLInputElement>(null)  
   const profile = getProfile.data?.data
 
   const {
@@ -76,7 +76,7 @@ const AccountPage = () => {
 
   if (getProfile.isLoading) {
     return (
-      <div className="flex flex-col gap-8 justify-center items-center py-8 px-4 mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl animate-pulse">
+      <div className="flex flex-col gap-8 justify-center items-center p-8 mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl animate-pulse">
         <div className="w-full flex flex-col items-center gap-6">
           <div className="w-32 h-32 rounded-full bg-gray-200"></div>
           <div className="h-8 w-48 bg-gray-200 rounded"></div>

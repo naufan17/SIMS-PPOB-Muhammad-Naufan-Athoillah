@@ -7,6 +7,18 @@ const Balance = () => {
 
   const balance = getBalance.data?.data.balance ?? 0
 
+  if (getBalance.isLoading) {
+    return (
+      <div className="w-full h-full p-6 bg-red-600 rounded-xl animate-pulse flex flex-col justify-between">
+        <div className="flex flex-col gap-2">
+          <div className="h-4 w-20 bg-white/20 rounded"></div>
+          <div className="h-9 w-48 bg-white/20 rounded mt-1"></div>
+        </div>
+        <div className="h-4 w-24 bg-white/20 rounded"></div>
+      </div>
+    )
+  }
+
   return (
     <div className="w-full h-full p-6 bg-red-600 rounded-xl relative overflow-hidden">
       {/* Decorative Circle */}
