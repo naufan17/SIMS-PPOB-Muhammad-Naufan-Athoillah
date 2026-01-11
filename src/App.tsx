@@ -13,7 +13,7 @@ import IndexPage from '@/pages'
 import LoginPage from '@/pages/login'
 import RegisterPage from '@/pages/register'
 import AccountPage from '@/pages/account'
-import TopUpPage from '@/pages/top-up'
+import TopUpPage from '@/pages/topup'
 import TransactionPage from '@/pages/transaction'
 
 import './index.css'
@@ -33,7 +33,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route element={<MainLayout />}>
           <Route index element={<IndexPage />} />
-          <Route path="/top-up" element={<TopUpPage />} />
+          <Route path="/topup" element={<TopUpPage />} />
           <Route path="/transaction" element={<TransactionPage />} />
           <Route path="/account" element={<AccountPage />} />
         </Route>
