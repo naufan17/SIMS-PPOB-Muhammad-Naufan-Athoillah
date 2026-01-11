@@ -1,5 +1,6 @@
 import { useState } from "react"
 import useTransaction from "@/api/transaction"
+import { formatCurrency } from "@/utils/format"
 
 const Balance = () => {
   const { getBalance } = useTransaction()
@@ -30,7 +31,7 @@ const Balance = () => {
             Saldo anda
           </span>
           <h2 className="text-white text-3xl font-bold tracking-wide">
-            Rp {showBalance ? balance.toLocaleString('id-ID') : "••••••••"}
+            {showBalance ? formatCurrency(balance) : "Rp ••••••••"}
           </h2>
         </div>
 

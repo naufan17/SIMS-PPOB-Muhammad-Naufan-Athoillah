@@ -43,7 +43,7 @@ const IndexPage = () => {
 
       {/* Banner Section */}
       <div className="w-full flex flex-col gap-4">
-        <h5 className="text-sm font-bold text-gray-800">
+        <h5 className="text-base font-bold text-gray-800">
           Temukan promo menarik
         </h5>
         <div className="w-full overflow-x-auto no-scrollbar flex flex-row gap-4 pb-4">

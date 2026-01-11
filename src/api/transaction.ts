@@ -7,6 +7,20 @@ export interface BalanceData {
   balance: number;
 }
 
+export interface TransactionItem {
+  invoice_number: string;
+  transaction_type: 'TOPUP' | 'PAYMENT';
+  description: string;
+  total_amount: number;
+  created_on: string;
+}
+
+export interface TransactionHistoryData {
+  offset: number;
+  limit: number;
+  records: TransactionItem[];
+}
+
 const useTransaction = () => {  
   const queryClient = useQueryClient();
 
@@ -47,19 +61,21 @@ const useTransaction = () => {
     }
   })
 
-  const getTransactionHistory = useQuery({
-    queryKey: ["transaction-history"],
-    queryFn: async () => {
-      const response = await axiosInstance.get("/transaction/history")
-      return response.data
-    },
-  })
+  const useTransactionHistory = (params?: { offset?: number; limit?: number }) => {
+    return useQuery<ApiResponse<TransactionHistoryData>>({
+      queryKey: ["transaction-history", params],
+      queryFn: async () => {
+        const response = await axiosInstance.get("/transaction/history", { params })
+        return response.data
+      },
+    })
+  }
 
   return {
     getBalance,
     createTopUp,
     createTransaction,
-    getTransactionHistory,
+    useTransactionHistory,
   }
 }
 

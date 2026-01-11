@@ -7,6 +7,7 @@ import Profile from "@/components/Profile"
 import Balance from "@/components/Balance"
 import useTransaction from "@/api/transaction"
 import Modal from "@/components/Modal"
+import { formatCurrency } from "@/utils/format"
 
 const topUpSchema = z.object({
   amount: z.number({ error: "Nominal harus berupa angka" })
@@ -47,7 +48,7 @@ const TopUpPage = () => {
           <div className="flex flex-col gap-1">
             <span>Top Up sebesar</span>
             <span className="text-xl font-bold text-gray-900">
-              Rp {data.amount.toLocaleString('id-ID')}
+              {formatCurrency(data.amount)}
             </span>
             <span>berhasil!</span>
           </div>
@@ -170,7 +171,7 @@ const TopUpPage = () => {
                 className={`py-3 px-2 border rounded text-sm font-medium transition-all duration-200
                   ${currentAmount === amount ? 'border-red-600 bg-red-50 text-red-600' : 'border-gray-300 text-gray-700 hover:border-red-500 hover:bg-red-50'}`}
               >
-                Rp {amount.toLocaleString('id-ID')}
+                {formatCurrency(amount)}
               </button>
             ))}
           </div>
