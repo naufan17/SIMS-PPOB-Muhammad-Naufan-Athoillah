@@ -28,31 +28,43 @@ const TopUpPage = () => {
   })
 
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [modalType, setModalType] = useState<'success' | 'error'>('success')
+  const [modalType, setModalType] = useState<'success' | 'error' | 'confirm'>('confirm')
   const [modalMessage, setModalMessage] = useState<ReactNode>('')
 
   const currentAmount = watch("amount")
 
   const onSubmit = (data: TopUpFormValues) => {
-    createTopUp.mutate({ top_up_amount: data.amount }, {
+    setModalType('confirm')
+    setModalMessage(
+      <div className="flex flex-col gap-1">
+        <span>Anda yakin untuk Top Up sebesar</span>
+        <span className="text-xl font-bold text-gray-900">
+          {formatCurrency(data.amount)} ?
+        </span>
+      </div>
+    )
+    setIsModalOpen(true)
+  }
+
+  const handleConfirmTopUp = () => {
+    const amount = currentAmount
+    createTopUp.mutate({ top_up_amount: amount }, {
       onSuccess: () => {
         setModalType('success')
         setModalMessage(
           <div className="flex flex-col gap-1">
             <span>Top Up sebesar</span>
             <span className="text-xl font-bold text-gray-900">
-              {formatCurrency(data.amount)}
+              {formatCurrency(amount)}
             </span>
             <span>berhasil!</span>
           </div>
         )
-        setIsModalOpen(true)
         reset({ amount: 0 })
       },
       onError: (error) => {
         setModalType('error')
         setModalMessage(error?.response?.data?.message || "Gagal melakukan Top Up")
-        setIsModalOpen(true)
       }
     })
   }
@@ -127,8 +139,12 @@ const TopUpPage = () => {
             <Modal
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
-              status={modalType}
-              title={modalType === 'success' ? 'Top Up Berhasil' : 'Top Up Gagal'}
+              showCloseButton={modalType !== 'confirm'}
+              status={modalType === 'confirm' ? 'info' : modalType}
+              title={
+                modalType === 'confirm' ? '' : 
+                modalType === 'success' ? 'Top Up Berhasil' : 'Top Up Gagal'
+              }
               icon={
                 modalType === 'success' ? (
                   <div className="bg-green-500 rounded-full p-4">
@@ -136,16 +152,38 @@ const TopUpPage = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                ) : (
+                ) : modalType === 'error' ? (
                   <div className="bg-red-500 rounded-full p-4">
                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </div>
+                ) : (
+                  <div className="bg-red-600 rounded-full w-16 h-16 flex items-center justify-center text-white text-3xl font-bold">
+                    !
+                  </div>
                 )
               }
             >
-              {modalMessage}
+              <div className="flex flex-col gap-6 items-center w-full">
+                {modalMessage}
+                {modalType === 'confirm' && (
+                  <div className="flex flex-col gap-3 w-full">
+                    <button 
+                      onClick={handleConfirmTopUp}
+                      className="text-red-600 font-bold hover:text-red-700 transition-all text-lg"
+                    >
+                      Ya, lanjutkan Top Up
+                    </button>
+                    <button 
+                      onClick={() => setIsModalOpen(false)}
+                      className="text-gray-400 font-bold hover:text-gray-600 transition-all text-lg"
+                    >
+                      Batalkan
+                    </button>
+                  </div>
+                )}
+              </div>
             </Modal>
           </div>
 
