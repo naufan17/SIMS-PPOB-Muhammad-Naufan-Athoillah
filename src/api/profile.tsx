@@ -1,8 +1,18 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "@/libs/axiosInstance";
+import type { ApiResponse } from "./auth";
+
+export interface ProfileData {
+  email: string;
+  first_name: string;
+  last_name: string;
+  profile_image: string;
+}
 
 const useProfile = () => {
-  const getProfile = useQuery({
+  const queryClient = useQueryClient();
+
+  const getProfile = useQuery<ApiResponse<ProfileData>>({
     queryKey: ['profile'],
     queryFn: async () => {
       const response = await axiosInstance.get('/profile')
@@ -12,19 +22,37 @@ const useProfile = () => {
 
   const updateProfile = useMutation({
     mutationFn: async (payload: { 
-      email: string; 
-      firstName: string;
-      lastName: string;
-      password: string 
-    }) => await axiosInstance.put('/profile', payload),
-    onSuccess: (data) => {
-      console.log(data)
+      first_name: string;
+      last_name: string;
+    }) => {
+      const response = await axiosInstance.put('/profile/update', payload)
+      return response.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['profile'] })
+    }
+  })
+
+  const updateImage = useMutation({
+    mutationFn: async (file: File) => {
+      const formData = new FormData()
+      formData.append('file', file)
+      const response = await axiosInstance.put('/profile/image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      return response.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['profile'] })
     }
   })
 
   return {
     getProfile,
     updateProfile,
+    updateImage,
   }
 }
 
