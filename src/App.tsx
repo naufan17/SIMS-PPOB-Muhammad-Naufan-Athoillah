@@ -16,6 +16,10 @@ import AccountPage from '@/pages/account'
 import TopUpPage from '@/pages/topup'
 import TransactionPage from '@/pages/transaction'
 
+// Error Pages
+import NotFoundPage from '@/pages/error/NotFound'
+import ForbiddenPage from '@/pages/error/Forbidden'
+
 import './index.css'
 
 function App() {
@@ -38,6 +42,10 @@ function App() {
           <Route path="/account" element={<AccountPage />} />
         </Route>
       </Route>
+
+      {/* Global Error Routes */}
+      <Route path="/forbidden" element={<ForbiddenPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
 }
