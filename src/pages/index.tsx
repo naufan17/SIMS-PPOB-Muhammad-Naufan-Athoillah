@@ -34,7 +34,11 @@ const IndexPage = () => {
                 className="flex flex-col items-center gap-2 group cursor-pointer"
               >
                 <div className="w-14 h-14 p-2 bg-gray-50 rounded-xl group-hover:bg-red-50 transition-colors flex items-center justify-center">
-                  <img src={service.service_icon} alt={service.service_name} className="w-full h-full object-contain" />
+                  <img 
+                    src={service.service_icon} 
+                    alt={service.service_name} 
+                    className="w-full h-full object-contain" 
+                  />
                 </div>
                 <h2 className="text-[11px] font-medium text-center leading-tight transition-colors group-hover:text-red-600">
                   {service.service_name}
@@ -45,7 +49,7 @@ const IndexPage = () => {
 
       {/* Banner Section */}
       <div className="w-full flex flex-col gap-4">
-        <h5 className="text-base font-bold text-gray-800">
+        <h5 className="text-lg font-bold text-gray-800">
           Temukan promo menarik
         </h5>
         <div className="w-full overflow-x-auto no-scrollbar flex flex-row gap-4 pb-4">
@@ -56,7 +60,11 @@ const IndexPage = () => {
                   key={index} 
                   className="min-w-[270px] h-28 rounded-xl overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
                 >
-                  <img src={banner.banner_image} alt={banner.banner_name} className="w-full h-full object-cover" />
+                  <img 
+                    src={banner.banner_image} 
+                    alt={banner.banner_name} 
+                    className="w-full h-full object-cover" 
+                  />
                 </div>
               ))}
         </div>

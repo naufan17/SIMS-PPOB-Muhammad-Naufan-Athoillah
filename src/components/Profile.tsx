@@ -1,4 +1,5 @@
 import useProfile from "@/api/profile"
+import ProfilePhoto from "@/assets/images/Profile Photo.png"
 import { ProfileSkeleton } from "./Skeleton"
 
 const Profile = () => {
@@ -12,7 +13,7 @@ const Profile = () => {
   return (
     <div className="w-full flex flex-col gap-4">
       <img 
-        src={profile?.profile_image && !profile.profile_image.includes('default') ? profile.profile_image : "https://minio.nutech-integrasi.com/take-home-test/profile/default.png"} 
+        src={profile?.profile_image && !profile.profile_image.includes('default') ? profile.profile_image : ProfilePhoto} 
         alt="Profile"
         className="w-20 h-20 rounded-full object-cover border-2 border-gray-100"
       />

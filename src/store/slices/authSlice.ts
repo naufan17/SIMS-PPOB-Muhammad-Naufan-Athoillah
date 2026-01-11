@@ -19,12 +19,12 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.isAuthenticated = true;
     },
-    deleteCredentials: (state) => {
+    destroyCredentials: (state) => {
       state.token = null;
       state.isAuthenticated = false;
     },
   },
 })
 
-export const { setCredentials, deleteCredentials } = authSlice.actions
+export const { setCredentials, destroyCredentials } = authSlice.actions
 export default authSlice.reducer

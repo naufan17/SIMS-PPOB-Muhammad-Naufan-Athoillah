@@ -1,6 +1,6 @@
 import Axios, { type AxiosInstance } from 'axios';
 import { store } from '@/store/store';
-import { deleteCredentials } from '@/store/slices/authSlice';
+import { destroyCredentials } from '@/store/slices/authSlice';
 
 const axiosInstance: AxiosInstance = Axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -30,7 +30,7 @@ axiosInstance.interceptors.response.use(
       error.response?.data.message === 'jwt malformed' ||
       error.response?.data.message === 'jwt signature is required'
     ) {
-      store.dispatch(deleteCredentials())
+      store.dispatch(destroyCredentials())
       window.location.href = '/login'
     }
 

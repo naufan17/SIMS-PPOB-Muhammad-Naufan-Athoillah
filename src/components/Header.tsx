@@ -17,7 +17,11 @@ const Header = () => {
       <div className="flex items-center justify-between mx-auto py-4 px-6 lg:px-8 sm:max-w-xl md:max-w-full lg:max-w-screen-xl">
         {/* Logo Section */}
         <Link to="/" className="flex items-center gap-2 group transition-transform active:scale-95">
-          <img src={Logo} className="w-8 h-8 object-contain" alt="Logo SIMS PPOB" />
+          <img 
+            src={Logo} 
+            className="w-8 h-8 object-contain"
+            alt="Logo SIMS PPOB"
+          />
           <h4 className="text-lg font-bold text-gray-800 group-hover:text-red-600 transition-colors">
             SIMS PPOB
           </h4>

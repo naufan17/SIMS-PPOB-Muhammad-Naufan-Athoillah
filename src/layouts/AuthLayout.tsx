@@ -10,8 +10,14 @@ const AuthLayout = () => {
       <div className="flex flex-col items-center justify-center p-8 lg:p-16">
         <div className="w-full max-w-md">
           <div className="flex justify-center items-center gap-2 mb-8">
-            <img src={Logo} alt="Logo" className="w-8 h-8" />
-            <h1 className="text-xl font-bold">SIMS PPOB</h1>
+            <img 
+              src={Logo} 
+              className="w-8 h-8" 
+              alt="Logo SIMS PPOB"
+            />
+            <h1 className="text-xl font-bold">
+              SIMS PPOB
+            </h1>
           </div>
           <Outlet />
         </div>

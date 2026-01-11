@@ -7,7 +7,8 @@ import useProfile from "@/api/profile"
 import ProfilePhoto from "@/assets/images/Profile Photo.png"
 import { accountSchema, type AccountFormValues } from "@/schemas/profile"
 import { useAppDispatch } from "@/hooks/redux"
-import { deleteCredentials } from "@/store/slices/authSlice"
+import { destroyCredentials } from "@/store/slices/authSlice"
+import { LoadingSkeleton } from "@/components/Skeleton"
 
 const AccountPage = () => {
   const { getProfile, updateProfile, updateImage } = useProfile()
@@ -54,7 +55,7 @@ const AccountPage = () => {
   }
 
   const handleLogout = () => {
-    dispatch(deleteCredentials())
+    dispatch(destroyCredentials())
     navigate("/login")
   }
 
@@ -69,22 +70,20 @@ const AccountPage = () => {
     return (
       <div className="flex flex-col gap-8 justify-center items-center p-8 mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl animate-pulse">
         <div className="w-full flex flex-col items-center gap-6">
-          <div className="w-32 h-32 rounded-full bg-gray-200"></div>
-          <div className="h-8 w-48 bg-gray-200 rounded"></div>
+          <div className="w-32 h-32 rounded-full bg-gray-200"/>
+          <div className="h-8 w-48 bg-gray-200 rounded"/>
         </div>
-
         <div className="w-full flex flex-col gap-6">
           {[1, 2, 3].map((i) => (
             <div key={i} className="flex flex-col gap-2">
-              <div className="h-4 w-20 bg-gray-200 rounded"></div>
-              <div className="h-11 w-full bg-gray-200 rounded"></div>
+              <div className="h-4 w-20 bg-gray-200 rounded"/>
+              <div className="h-11 w-full bg-gray-200 rounded"/>
             </div>
           ))}
-          <div className="h-11 w-full bg-gray-200 rounded mt-2"></div>
+          <div className="h-11 w-full bg-gray-200 rounded mt-2"/>
         </div>
-
         <div className="w-full">
-          <div className="h-11 w-full bg-gray-200 rounded"></div>
+          <div className="h-11 w-full bg-gray-200 rounded"/>
         </div>
       </div>
     )
@@ -189,7 +188,7 @@ const AccountPage = () => {
             disabled={updateProfile.isPending}
             className="w-full h-11 px-2 inline-flex items-center justify-center font-semibold text-white bg-red-600 hover:bg-red-700 rounded transition-all active:scale-[0.98] disabled:opacity-70"
           >
-            {updateProfile.isPending ? "Menyimpan..." : "Simpan Perubahan"}
+            {updateProfile.isPending ? <LoadingSkeleton /> : "Simpan Perubahan"}
           </button>
         </div>
       </form>

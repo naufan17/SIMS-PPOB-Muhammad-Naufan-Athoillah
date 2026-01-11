@@ -1,10 +1,10 @@
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { useAppDispatch } from "@/hooks/redux";
-import { setCredentials } from "@/store/slices/authSlice";
 
 import axiosInstance from "@/libs/axiosInstance";
+import { useAppDispatch } from "@/hooks/redux";
+import { setCredentials } from "@/store/slices/authSlice";
 
 export interface ApiResponse<T = unknown> {
   status: number;
@@ -54,9 +54,6 @@ const useAuth = () => {
       const response = await axiosInstance.post('/registration', payload);
       return response.data;
     },
-    onSuccess: (data) => {
-      console.log(data)
-    }
   })
 
   return {
