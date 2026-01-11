@@ -111,8 +111,8 @@ const TopUpPage = () => {
               <button 
                 type="submit" 
                 disabled={!isValid || createTopUp.isPending}
-                className={`w-full h-12 inline-flex items-center justify-center font-semibold text-white bg-red-600 hover:bg-red-700 rounded shadow-sm transition-all duration-200
-                  ${(!isValid || createTopUp.isPending) ? 'bg-gray-300 cursor-not-allowed' : 'active:scale-[0.98]'}`}
+                className={`w-full h-12 inline-flex items-center justify-center font-semibold text-white  rounded shadow-sm transition-all duration-200
+                  ${(!isValid || createTopUp.isPending) ? 'bg-gray-300 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700 active:scale-[0.98]'}`}
               >
                 {createTopUp.isPending ? <LoadingSkeleton /> : "Top Up"}
               </button>
