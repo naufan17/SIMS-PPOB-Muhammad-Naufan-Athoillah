@@ -1,7 +1,8 @@
+import { AxiosError } from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+
 import axiosInstance from "@/libs/axiosInstance"
 import type { ApiResponse } from "./auth";
-import { AxiosError } from "axios";
 
 export interface BalanceData {
   balance: number;

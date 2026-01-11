@@ -1,28 +1,9 @@
-import { z } from "zod"
 import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+
 import useAuth from "@/api/auth"
-
-const registerSchema = z.object({
-  email: z.string()
-    .min(1, { message: "Email tidak boleh kosong" })
-    .email({ message: "Format email tidak valid" }),
-  first_name: z.string()
-    .min(1, { message: "Nama depan tidak boleh kosong" }),
-  last_name: z.string()
-    .min(1, { message: "Nama belakang tidak boleh kosong" }),
-  password: z.string()
-    .min(1, { message: "Password tidak boleh kosong" })
-    .min(8, { message: "Password minimal 8 karakter" }),
-  confirm_password: z.string()
-    .min(1, { message: "Konfirmasi password tidak boleh kosong" })
-}).refine((data) => data.password === data.confirm_password, {
-  message: "Password tidak cocok",
-  path: ["confirm_password"]
-})
-
-type RegisterFormValues = z.infer<typeof registerSchema>
+import { registerSchema, type RegisterFormValues } from "@/schemas/auth"
 
 const RegisterPage = () => {
   const { register: registerMutation } = useAuth()

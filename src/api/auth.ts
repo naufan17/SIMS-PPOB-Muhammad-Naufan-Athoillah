@@ -1,9 +1,10 @@
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import axiosInstance from "@/libs/axiosInstance";
 import { useAppDispatch } from "@/hooks/redux";
 import { setCredentials } from "@/store/slices/authSlice";
-import { useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
+
+import axiosInstance from "@/libs/axiosInstance";
 
 export interface ApiResponse<T = unknown> {
   status: number;

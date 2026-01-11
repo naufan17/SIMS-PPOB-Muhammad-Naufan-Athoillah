@@ -1,21 +1,13 @@
+import { useState, type ReactNode } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
 
-import { useState, type ReactNode } from "react"
 import Profile from "@/components/Profile"
 import Balance from "@/components/Balance"
 import useTransaction from "@/api/transaction"
 import Modal from "@/components/Modal"
 import { formatCurrency } from "@/utils/format"
-
-const topUpSchema = z.object({
-  amount: z.number({ error: "Nominal harus berupa angka" })
-    .min(10000, "Minimal Top Up adalah Rp 10.000")
-    .max(1000000, "Maksimal Top Up adalah Rp 1.000.000"),
-})
-
-type TopUpFormValues = z.infer<typeof topUpSchema>
+import { topUpSchema, type TopUpFormValues } from "@/schemas/transaction"
 
 const PREDEFINED_AMOUNTS = [10000, 20000, 50000, 100000, 250000, 500000]
 

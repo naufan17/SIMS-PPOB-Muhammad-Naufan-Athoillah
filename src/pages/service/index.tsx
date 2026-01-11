@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react"
 import { useParams, useNavigate } from "react-router-dom"
+
 import Profile from "@/components/Profile"
 import Balance from "@/components/Balance"
 import useInformation from "@/api/information"

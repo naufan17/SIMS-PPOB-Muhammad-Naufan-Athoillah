@@ -1,8 +1,10 @@
 import { useState } from "react";
+
 import Profile from "@/components/Profile";
 import Balance from "@/components/Balance";
 import useTransaction from "@/api/transaction";
 import { formatDate, formatCurrency } from "@/utils/format";
+import { TransactionSkeleton } from "@/components/Skeleton";
 
 const TransactionPage = () => {
   const [limit, setLimit] = useState(5);
@@ -33,7 +35,7 @@ const TransactionPage = () => {
           {isLoading && (
             <div className="flex flex-col gap-4">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="w-full h-24 bg-gray-100 animate-pulse rounded-xl" />
+                <TransactionSkeleton key={i} />
               ))}
             </div>
           )}

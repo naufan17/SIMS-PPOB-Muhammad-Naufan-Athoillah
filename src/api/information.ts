@@ -1,5 +1,6 @@
-import axiosInstance from "@/libs/axiosInstance"
 import { useQuery } from "@tanstack/react-query"
+
+import axiosInstance from "@/libs/axiosInstance"
 import type { ApiResponse } from "./auth";
 
 export interface BannerData {

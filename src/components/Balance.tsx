@@ -1,23 +1,18 @@
-import { useState } from "react"
 import useTransaction from "@/api/transaction"
 import { formatCurrency } from "@/utils/format"
+import { useAppDispatch, useAppSelector } from "@/hooks/redux"
+import { toggleShowBalance } from "@/store/slices/uiSlice"
+import { BalanceSkeleton } from "./Skeleton"
 
 const Balance = () => {
+  const dispatch = useAppDispatch()
+  const { showBalance } = useAppSelector((state) => state.ui)
   const { getBalance } = useTransaction()
-  const [showBalance, setShowBalance] = useState(false)
 
   const balance = getBalance.data?.data.balance ?? 0
 
   if (getBalance.isLoading) {
-    return (
-      <div className="w-full h-full p-6 bg-red-600 rounded-xl animate-pulse flex flex-col justify-between">
-        <div className="flex flex-col gap-2">
-          <div className="h-4 w-20 bg-white/20 rounded"></div>
-          <div className="h-9 w-48 bg-white/20 rounded mt-1"></div>
-        </div>
-        <div className="h-4 w-24 bg-white/20 rounded"></div>
-      </div>
-    )
+    return <BalanceSkeleton />
   }
 
   return (
@@ -36,7 +31,7 @@ const Balance = () => {
         </div>
 
         <button 
-          onClick={() => setShowBalance(!showBalance)}
+          onClick={() => dispatch(toggleShowBalance())}
           className="flex items-center gap-2 text-white/90 text-xs font-medium mt-4 hover:text-white transition-colors group"
         >
           {showBalance ? (

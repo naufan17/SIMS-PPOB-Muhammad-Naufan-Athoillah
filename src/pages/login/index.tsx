@@ -1,4 +1,3 @@
-import { z } from "zod"
 import { Link } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useForm } from "react-hook-form"
@@ -6,18 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import useAuth from "@/api/auth"
 import type { AppDispatch } from "@/store/store"
+import { loginSchema, type LoginFormValues } from "@/schemas/auth"
 import { setCredentials } from "@/store/slices/authSlice"
-
-const loginSchema = z.object({
-  email: z.string()
-    .min(1, { message: "Email tidak boleh kosong" })
-    .email({ message: "Format email tidak valid" }),
-  password: z.string()
-    .min(1, { message: "Password tidak boleh kosong" })
-    .min(8, { message: "Password minimal 8 karakter" })
-})
-
-type LoginFormValues = z.infer<typeof loginSchema>
 
 const LoginPage = () => {
   const dispatch = useDispatch<AppDispatch>();

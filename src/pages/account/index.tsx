@@ -1,22 +1,13 @@
-import { z } from "zod"
 import { useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import useProfile from "@/api/profile"
+import ProfilePhoto from "@/assets/images/Profile Photo.png"
+import { accountSchema, type AccountFormValues } from "@/schemas/profile"
 import { useAppDispatch } from "@/hooks/redux"
 import { deleteCredentials } from "@/store/slices/authSlice"
-import ProfilePhoto from "@/assets/images/Profile Photo.png"
-
-// Schema matching the API fields
-const accountSchema = z.object({
-  email: z.string().email(),
-  first_name: z.string().min(1, "Nama depan tidak boleh kosong"),
-  last_name: z.string().min(1, "Nama belakang tidak boleh kosong"),
-})
-
-type AccountFormValues = z.infer<typeof accountSchema>
 
 const AccountPage = () => {
   const { getProfile, updateProfile, updateImage } = useProfile()

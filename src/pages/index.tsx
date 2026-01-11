@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+
 import Profile from "@/components/Profile";
 import Balance from "@/components/Balance";
 import useInformation, { type BannerData, type ServiceData } from "@/api/information";
+import { ServiceSkeleton, BannerSkeleton } from "@/components/Skeleton";
 
 const IndexPage = () => {
   const { getServices, getBanner } = useInformation()
@@ -24,12 +26,7 @@ const IndexPage = () => {
       {/* Services Section */}
       <div className="w-full grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-4">
         {getServices.isLoading
-          ? [...Array(12)].map((_, i) => (
-              <div key={i} className="flex flex-col items-center gap-2 animate-pulse">
-                <div className="w-12 h-12 bg-gray-200 rounded-lg"></div>
-                <div className="h-3 w-16 bg-gray-200 rounded"></div>
-              </div>
-            ))
+          ? [...Array(12)].map((_, i) => <ServiceSkeleton key={i} />)
           : services?.map((service: ServiceData, index: number) => (
               <Link 
                 to={`/service/${service.service_code}`}
@@ -53,9 +50,7 @@ const IndexPage = () => {
         </h5>
         <div className="w-full overflow-x-auto no-scrollbar flex flex-row gap-4 pb-4">
           {getBanner.isLoading
-            ? [...Array(4)].map((_, i) => (
-                <div key={i} className="min-w-[270px] h-28 bg-gray-200 rounded-xl animate-pulse"></div>
-              ))
+            ? [...Array(4)].map((_, i) => <BannerSkeleton key={i} />)
             : banners?.map((banner: BannerData, index: number) => (
                 <div 
                   key={index} 

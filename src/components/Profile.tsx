@@ -1,19 +1,12 @@
 import useProfile from "@/api/profile"
+import { ProfileSkeleton } from "./Skeleton"
 
 const Profile = () => {
   const { getProfile } = useProfile()
   const profile = getProfile.data?.data
 
   if (getProfile.isLoading) {
-    return (
-      <div className="w-full flex flex-col gap-4 animate-pulse">
-        <div className="w-24 h-24 rounded-full bg-gray-200"></div>
-        <div className="flex flex-col gap-2">
-          <div className="h-4 w-32 bg-gray-200 rounded"></div>
-          <div className="h-6 w-48 bg-gray-200 rounded"></div>
-        </div>
-      </div>
-    )
+    return <ProfileSkeleton />
   }
 
   return (
