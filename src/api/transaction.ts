@@ -1,12 +1,15 @@
-import { useMutation, useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import axiosInstance from "@/libs/axiosInstance"
 import type { ApiResponse } from "./auth";
+import { AxiosError } from "axios";
 
 export interface BalanceData {
   balance: number;
 }
 
 const useTransaction = () => {  
+  const queryClient = useQueryClient();
+
   const getBalance = useQuery<ApiResponse<BalanceData>>({
     queryKey: ["balance"],
     queryFn: async () => {
@@ -15,22 +18,33 @@ const useTransaction = () => {
     },
   })
 
-  const createTopUp = useMutation({
+  const createTopUp = useMutation<ApiResponse<BalanceData>, AxiosError<ApiResponse>, {
+    top_up_amount: number;
+  }>({
     mutationFn: async (payload: {
-      top_up_amount: string;
+      top_up_amount: number;
     }) => {
       const response = await axiosInstance.post("/topup", payload)
       return response.data
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["balance"] })
+    }
   })
 
-  const createTransaction = useMutation({
+  const createTransaction = useMutation<ApiResponse<unknown>, AxiosError<ApiResponse>, {
+    service_code: string;
+  }>({
     mutationFn: async (payload: {
       service_code: string;
     }) => {
       const response = await axiosInstance.post("/transaction", payload)
       return response.data
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["balance"] })
+      queryClient.invalidateQueries({ queryKey: ["transaction-history"] })
+    }
   })
 
   const getTransactionHistory = useQuery({

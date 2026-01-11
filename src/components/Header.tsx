@@ -7,7 +7,7 @@ const Header = () => {
 
   const navLinks = [
     { to: "/topup", label: "Top Up" },
-    { to: "/transaction", label: "Transaction" },
+    { to: "/transaction", label: "Transaksi" },
     { to: "/account", label: "Akun" },
   ]
 

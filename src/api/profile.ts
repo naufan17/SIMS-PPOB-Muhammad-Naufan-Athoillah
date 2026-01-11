@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "@/libs/axiosInstance";
 import type { ApiResponse } from "./auth";
+import { AxiosError } from "axios";
 
 export interface ProfileData {
   email: string;
@@ -20,7 +21,10 @@ const useProfile = () => {
     },
   })
 
-  const updateProfile = useMutation({
+  const updateProfile = useMutation<ApiResponse<ProfileData>, AxiosError<ApiResponse>, {
+    first_name: string;
+    last_name: string;
+  }>({
     mutationFn: async (payload: { 
       first_name: string;
       last_name: string;
@@ -33,7 +37,7 @@ const useProfile = () => {
     }
   })
 
-  const updateImage = useMutation({
+  const updateImage = useMutation<ApiResponse<ProfileData>, AxiosError<ApiResponse>, File>({
     mutationFn: async (file: File) => {
       const formData = new FormData()
       formData.append('file', file)
