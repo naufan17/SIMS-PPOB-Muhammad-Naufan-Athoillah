@@ -41,6 +41,14 @@ const Modal: React.FC<ModalProps> = ({
     }
   };
 
+  const getStatusAnimation = () => {
+    switch (status) {
+      case 'success': return 'animate-icon-bounce';
+      case 'error': return 'animate-icon-shake';
+      default: return 'animate-icon-pop';
+    }
+  };
+
   return createPortal(
     <div 
       className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
@@ -52,7 +60,7 @@ const Modal: React.FC<ModalProps> = ({
       >
         <div className="p-6 flex flex-col items-center text-center">
           {icon && (
-            <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-4 shadow-sm ${getStatusColor()}`}>
+            <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-4 shadow-sm ${getStatusColor()} ${getStatusAnimation()}`}>
               {icon}
             </div>
           )}
